@@ -7,7 +7,7 @@
     "start": "node index",
     "dev": "nodemon index"
   },
-  "type": "module",
+  "type": "commonjs",
   "author": "Gerry Monga",
   "license": "ISC"
 }
