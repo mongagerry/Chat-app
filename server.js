@@ -29,8 +29,8 @@ io.on('connection', socket => {
     socket.on('JoinRoom', (username, room) =>{
     const user = addUser(username, room, socket.id)
     socket.join(user.room)
-    socket.emit('message', createobj(bot, 'You have joined'))
-    socket.broadcast.to(user.room).emit('message', createobj(bot, `User ${user.username} has joined`))
+    socket.emit('message', createobj(bot, 'You have joined!'))
+    socket.broadcast.to(user.room).emit('message', createobj(bot, `User ${user.username} has joined!`))
     io.to(user.room).emit('userRoom', {
         room: user.room,
         users: getUserRoom(user.room)})
@@ -45,7 +45,7 @@ io.on('connection', socket => {
     socket.on('disconnect', () =>{
         let user = userLeave(socket.id)
         if(user){
-        io.to(user.room).emit('message', createobj(bot, `User ${user.username} has left`))
+        io.to(user.room).emit('message', createobj(bot, `User ${user.username} has left!`))
         
         io.to(user.room).emit('userRoom', {
             room: user.room,
