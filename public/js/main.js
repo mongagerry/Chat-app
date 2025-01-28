@@ -39,12 +39,11 @@ function showMessage(message) {
 }
 
 socket.on('userRoom', (data) =>{
-    console.log(data.room)
+    
     roomname.innerText = data.room
     let insertHTML = '';
     {data.users.forEach((user) => {
         insertHTML += `<li>${user.username}</li>`
     })}
-    console.log(insertHTML)
     userlist.innerHTML = insertHTML;
 })

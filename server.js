@@ -4,6 +4,7 @@
 // import http from 'http'
 // import socketio from 'socket.io'
 
+const sanitizeUserInput = require('./utils/sanitise.js')
 const createobj = require('./utils/userobject')
 const path = require('path')
 const express = require('express')
@@ -36,13 +37,13 @@ io.on('connection', socket => {
     })
     
     socket.on('chatMessage', (msg) =>{
+        msg = sanitizeUserInput(msg)
         let user = getUser(socket.id)
         io.to(user.room).emit('message', createobj(user.username,msg))
     })
 
     socket.on('disconnect', () =>{
         let user = userLeave(socket.id)
-        console.log(user)
         if(user){
         io.to(user.room).emit('message', createobj(bot, `User ${user.username} has left`))
         
