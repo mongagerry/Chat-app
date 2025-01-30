@@ -1,25 +1,22 @@
-let users = []
 
-function addUser(username, room, id){
-    let user = {
+async function addUser(User, username, room, id){
+    let user = new User({
     username,
     room,
     id
-}
-    users.push(user)
+})
+    await user.save()
     return user
 }
-function getUser(id){
-    return users.find(user => user.id === id)
+async function getUser(User, ref_id){
+    let user = await User.findOne({id: ref_id})
+    return user 
+}
+async function userLeave(User, ref_id){
+    return await User.findOneAndDelete({id:ref_id})
 }
 
-function userLeave(id){
-    const index = users.findIndex((user) => user.id === id)
-    if(index !== -1)
-    return users.splice(index, 1)[0]
-}
-
-function getUserRoom(room){
-    return users.filter((user) => user.room === room)
+async function getUserRoom(User, ref_room){
+    return await User.find({room: ref_room})
 }
 module.exports = {getUser, addUser, userLeave, getUserRoom} 

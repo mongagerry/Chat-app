@@ -4,8 +4,8 @@
   "description": "Real time chat app with chat rooms",
   "main": "server.js",
   "scripts": {
-    "start": "node server",
-    "dev": "nodemon server"
+    "start": "node --env-file=.env server.js",
+    "dev": "nodemon --env-file=.env server.js"
   },
   "type": "commonjs",
   "author": "Gerry Monga",
@@ -13,6 +13,7 @@
   "dependencies": {
     "express": "^4.21.2",
     "moment": "^2.30.1",
+    "mongoose": "^8.9.5",
     "sanitize-html": "^2.14.0",
     "socket.io": "^4.8.1"
   },
